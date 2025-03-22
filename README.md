@@ -5,6 +5,6 @@ Each version is within it's own Branch and contains sample config, Dockerfile to
 
 ## Versions
 
-| Version   | Name      | Branch                                                       | Images |
+| Version   | Name      | Branch                                                       | Image |
 |-----------|-----------|--------------------------------------------------------------|--|
-| 2024.2    | Dalmation | https://github.com/RPT-OpenStack/docker-keystone/tree/2024.2 |  | 
+| 2024.2    | Dalmation | https://github.com/RPT-OpenStack/docker-keystone/tree/2024.2 | ghcr.io/rpt-openstack/docker-keystone:2024.2 | 
