@@ -8,7 +8,6 @@ services:
     ports:
       - 3306:3306
     environment:
-      MARIADB_ROOT_PASSWORD: k3yst0ne!
       MARIADB_USER: keystone
       MARIADB_PASSWORD: k3yst0ne!
       MARIADB_DATABASE: keystone
