@@ -18,7 +18,7 @@ services:
     restart: always
 
   keystone:
-    image: keystone:2024.2
+    image: ghcr.io/rpt-openstack/docker-keystone:2024.2
     volumes:
       - ${PWD}/etc/keystone/keystone.conf:/etc/keystone/keystone.conf
       - ${PWD}/etc/keystone/fernet-keys:/etc/keystone/fernet-keys
