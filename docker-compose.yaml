@@ -1,0 +1,43 @@
+
+
+services:
+  keystone-db:
+    image: mariadb:11.7.2
+    volumes:
+      - keystone-db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: k3yst0ne!
+      MARIADB_USER: keystone
+      MARIADB_PASSWORD: k3yst0ne!
+      MARIADB_DATABASE: keystone
+    healthcheck:
+      test: [ "CMD", "mariadb-admin" ,"ping" ]
+      timeout: 5s
+      retries: 10
+    restart: always
+
+  keystone:
+    image: keystone:2024.2
+    volumes:
+      - ${PWD}/etc/keystone/keystone.conf:/etc/keystone/keystone.conf
+      - ${PWD}/etc/keystone/fernet-keys:/etc/keystone/fernet-keys
+      - ${PWD}/etc/keystone/credential-keys:/etc/keystone/credential-keys
+    ports:
+      - 5000:5000
+    restart: always
+
+  keystone-db-migration:
+    image: keystone:2024.2
+    depends_on:
+      keystone-db:
+        condition: service_healthy
+    volumes:
+      - ${PWD}/etc/keystone/keystone.conf:/etc/keystone/keystone.conf
+      - ${PWD}/etc/keystone/fernet-keys:/etc/keystone/fernet-keys
+      - ${PWD}/etc/keystone/credential-keys:/etc/keystone/credential-keys
+    command:  ["keystone-manage", "db_sync"]
+
+volumes:
+  keystone-db:
